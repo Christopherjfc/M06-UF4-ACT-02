@@ -4,12 +4,19 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.iticbcn.mywebapp.llibresapp.Model.Llibre;
 import com.iticbcn.mywebapp.llibresapp.Repositoris.Repositori;
 
+@Service
 public class LlibreServiceImpl implements LlibreService {
 
+    @Autowired
     private Repositori repositori;
+    
+
     @Override
     public Set<Llibre> obtenirTotsElsLlibres() {
         return repositori.findAll();
@@ -30,7 +37,6 @@ public class LlibreServiceImpl implements LlibreService {
         return repositori.findById(idLlibre);
     }
 
-    @Override
     public boolean validaISBN(String isbn) {
         /*
          * Retorna true si son 13 números
@@ -39,6 +45,16 @@ public class LlibreServiceImpl implements LlibreService {
          */
         String isbn13Regex = "^(978|979)\\d{10}$";
         return Pattern.matches(isbn13Regex, isbn);
+    }
+
+    public boolean desaLlibre(Llibre llibre) {
+        if (!validaISBN(llibre.getIsbn())) {
+            return false;
+        }
+
+        // Se guarda si el ISBN es correcto
+        repositori.save(llibre);
+        return true;
     }
     
 }

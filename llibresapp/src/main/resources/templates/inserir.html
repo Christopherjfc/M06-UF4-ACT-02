@@ -8,15 +8,21 @@
 <body>
     <center>
         <H1>Inserció de nou llibre</H1>
-            <form action="/inserir" method="post">
-                Titol: <input type="text" name="titol"><br><br>
-                Autor: <input type="text" name="autor"><br><br>
-                Editorial: <input type="text" name="editorial"><br><br>
-                IBSN: <input type="text" name="isbn"><br><br>
-                Data de publicacio: <input type="text" name="datapublicacio"><br><br>
-                Tematica: <input type="text" name="tematica"><br><br>
-                <input type=submit name="submit" value="Desar">
-            </form>
+        <form action="/inserir" method="post" th:object="${llibre}">
+            Titol: <input type="text" th:field="*{titol}"><br><br>
+            Autor: <input type="text" th:field="*{autor}"><br><br>
+            Editorial: <input type="text" th:field="*{editorial}"><br><br>
+            Data de publicacio: <input type="date" th:field="*{datapublicacio}"><br><br>
+            ISBN: <input type="text" th:field="*{isbn}"><br><br>
+            Tematica: <input type="text" th:field="*{tematica}"><br><br>
+            <input type="submit" name="submit" value="Desar">
+
+        </form>
+        
+        <div th:if="${llibreErr}">
+            <p th:text="${message}"></p>
+        </div>
+        
         <p><a href="/index">Tornar enrere</a></p>   
     </center>
 </body>

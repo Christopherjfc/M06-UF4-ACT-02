@@ -17,24 +17,27 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "Book")
+@Table(name = "book")
 public class Llibre implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idLlibre;
+    private int idllibre;
 
-    @Column(nullable = false)
+    @Column
     private String titol;
 
-    @Column(nullable = false)
+    @Column
     private String autor;
 
+    @Column
     private String editorial;
 
+    @Column
     private LocalDate datapublicacio;
 
     @Column(nullable = false, unique = true)
     private String isbn;
 
+    @Column
     private String tematica;
 }

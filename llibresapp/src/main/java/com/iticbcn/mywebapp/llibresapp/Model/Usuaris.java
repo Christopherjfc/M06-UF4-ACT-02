@@ -1,10 +1,7 @@
 package com.iticbcn.mywebapp.llibresapp.Model;
 
 public class Usuaris {
-
-    // private int idUsuari;
-    // private String nomUsuari;
-
+    
     private String usuari;
     private String password;
 
