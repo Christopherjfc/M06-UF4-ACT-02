@@ -79,10 +79,16 @@ Aquesta interfície implementa mètodes més avançats com: **flush()**, **saveA
 
 
 ### **Què significa Optional< Classe> i per a què serveix?**
-Optional<Classe> és un contenidor que encapsula un valor que pot ser present o buit, evitant errors de NullPointerException.
-
-Quan fem un findBy, ens retorna un Optional, el que ens obliga a comprovar si l'objecte existeix abans d'usar-lo.
-
-Té mètodes útils com isPresent() per saber si hi ha un valor, get() per obtenir-lo si existeix, etc.
+**Optional< Classe>** és un contenidor que encapsula un valor que pot ser present o buit, evitant errors de **NullPointerException**. <br>
+Quan fem un **'"findBy"'**, ens retorna un Optional, el que ens obliga a comprovar si l'objecte existeix abans d'usar-lo. <br>
+Té mètodes útils com **isPresent()** per saber si hi ha un valor, **get()** per obtenir-lo si existeix, etc.
 
 ### **Per què el controlador utilitza el servei i no la seva implementació?** 
+
+El controlador pot utilitzar la interfície del servei gràcies a la injecció de dependències de Spring, que es fa amb l’anotació **@Autowired**.
+
+Quan declaro **"@Autowired private LlibreService llibreService"** en el controlador, Spring busca una implementació d’aquesta interfície, molt important que contingui l’anotació **@Service**, i l’assigna automàticament.
+
+Per aquesta raó, quan el controlador necessita utilitzar llibreService, Spring injecta directament la implementació corresponent.
+
+D’aquesta manera, el codi és més flexible i escalable, i si en el futur es vol canviar la implementació del servei, no caldrà modificar el controlador.
