@@ -11,4 +11,5 @@ public interface LlibreService {
     Set<Llibre> obtenirPerTitolEditorial(String titol, String editorial);
     Optional<Llibre> findByIdLlibre(Long idLlibre);
     boolean validaISBN(String isbn);
+    boolean desaLlibre(Llibre llibre);
 }

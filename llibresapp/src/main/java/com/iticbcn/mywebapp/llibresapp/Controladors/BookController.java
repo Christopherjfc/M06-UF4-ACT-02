@@ -15,14 +15,14 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.iticbcn.mywebapp.llibresapp.Model.Llibre;
 import com.iticbcn.mywebapp.llibresapp.Model.Usuaris;
-import com.iticbcn.mywebapp.llibresapp.Serveis.LlibreServiceImpl;
+import com.iticbcn.mywebapp.llibresapp.Serveis.LlibreService;
 
 @Controller
 @SessionAttributes("users")
 public class BookController {
 
     @Autowired
-    private LlibreServiceImpl llibreServiceImpl;
+    private LlibreService llibreService;
 
     @GetMapping("/")
     public String iniciar(Model model) {
@@ -61,7 +61,7 @@ public class BookController {
     public String consulta(@ModelAttribute("users") Usuaris users,Model model) {
 
         // Obté tots els llibres de la BBDD
-        Set<Llibre> llibres = llibreServiceImpl.obtenirTotsElsLlibres();
+        Set<Llibre> llibres = llibreService.obtenirTotsElsLlibres();
 
         model.addAttribute("llibres", llibres);
         
@@ -110,7 +110,7 @@ public class BookController {
          */
 
         // Si no se lllega a insertar el libro (libreErr = true)
-        boolean llibreErr = !llibreServiceImpl.desaLlibre(llibre);
+        boolean llibreErr = !llibreService.desaLlibre(llibre);
 
         // El mensaje solo se mostrará si hay un error en el insert
         String message = "L'ISBN no és vàlid. Ha de tenir 13 dígits i començar per 978 o 979.";
@@ -138,7 +138,7 @@ public class BookController {
             idLlib = Long.parseLong(idLlibre);
             
             // Si el liibro es encontrado, lo guarda en el contendeor Optional
-            Optional<Llibre> llibreOpcional = llibreServiceImpl.findByIdLlibre(idLlib);
+            Optional<Llibre> llibreOpcional = llibreService.findByIdLlibre(idLlib);
             
             if(llibreOpcional.isPresent()) {
                 // Uso el método get() para obtener el Libro que se guardó en el contenedor Optional
